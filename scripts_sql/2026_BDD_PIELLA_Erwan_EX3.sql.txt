@@ -1,0 +1,17 @@
+-- ============================================
+-- Exercice 3 : Création Tables
+-- Réalisé par : Piella Erwan
+-- Date : 18/05/2026
+-- ============================================
+
+--1) pseudo et date de creneaux authorisée
+Select pseudo,DATE(date_debut_autorisee) from streamer inner join creneau on streamer.id_streamer = creneau.id_streamer ORDER BY pseudo,DATE(date_debut_autorisee);
+
+--2)
+SELECT titre, pseudo, DATE(date_debut_autorisee)
+	from stream inner Join (streamer inner join creneau on streamer.id_streamer = creneau.id_streamer) on streamer.id_streamer = stream.id_streamer
+		where DATE(date_debut_autorisee) >'2025-10-19' and DATE(date_debut_autorisee) > '2025-10-20'
+--3)
+SELECT defi.intitule, streamer.pseudo, defi.montant_palier
+	FROM Defi JOIN participation_defi ON defi.id_defi = participation_defi.id_defi JOIN Streamer ON participation_defi.id_streamer = streamer.id_streamer
+			ORDER BY intitule,pseudo;

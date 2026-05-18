@@ -1,0 +1,17 @@
+-- ============================================
+-- Exercice 2 : Création Tables
+-- Réalisé par : Piella Erwan
+-- Date : 18/05/2026
+-- ============================================
+
+--1) verification de la table streamer
+Select pseudo,url_twitch from streamer order by pseudo;
+
+--2) selection des creneaux du 19 octobre 2026
+Select * from creneau where DATE(date_debut_autorisee) = '2026-10-19';
+
+--3) défis réalisé d'un palier supèrieur a 5000
+Select * from defi where montant_palier > 5000 AND etat_validation = true;
+
+--4) les streams qui n'ont pas une date de fin effective
+Select * from stream where date_fin_effective IS NULL;
