@@ -1,0 +1,81 @@
+-- ============================================
+-- Exercice N : Création Tables
+-- Réalisé par : Piella Erwan
+-- Date : 18/05/2026
+-- ============================================
+
+--1) insertion des streamers
+INSERT INTO streamer( pseudo, url_twitch) 
+	Values 
+		('Zerator', 'https://www.twitch.tv/zerator'),
+		('Etoiles','https://www.twitch.tv/etoiles'),
+		('Alderiate','https://www.twitch.tv/alderiate'),
+		('Gotaga','https://www.twitch.tv/gotaga'),
+		('Trayton','https://www.twitch.tv/traytonlol'),
+		('Nisqyy','https://www.twitch.tv/nisqyy'),
+		('Jezu','https://www.twitch.tv/jezu_lol'),
+		('Lapi','https://www.twitch.tv/lapi'),
+		('Pandore','https://www.twitch.tv/pandorelol'),
+		('Wakz','https://www.twitch.tv/wakzlol');
+
+--2) insertion des creneaux
+INSERT INTO creneau( date_debut_autorisee, date_fin_autorisee, id_streamer) 
+	Values 
+		('2026-10-19 10:00:00+01','2026-10-19 19:00:00+01',4),
+		('2026-10-19 14:00:00+01','2026-10-19 23:00:00+01',3),
+		('2026-10-19 18:00:00+01','2026-10-20 08:00:00+01',6),
+		('2026-10-20 10:00:00+01','2026-10-19 19:00:00+01',4),
+		('2026-10-20 14:00:00+01','2026-10-19 23:00:00+01',3),
+		('2026-10-21 18:00:00+01','2026-10-20 08:00:00+01',6);
+
+--3) insertion des Défis
+INSERT INTO defi(intitule, montant_palier, etat_validation) 
+	Values 
+		('Le streamer joue pendant 1 heure avec les contrôles inversés.', 500, false),
+		('Dégustation d’un “cocktail mystère” préparé par le chat (safe évidemment).',1000,false),
+		('Cosplay imposé pendant tout le reste du live.',2500,false),
+		('Le chat choisit un tatouage temporaire XXL à porter pendant le week-end.',5000,false),
+		('Marathon gaming sans pause de 6 heures sur un jeu réputé difficile.',10000,false),
+		('Stream IRL dans la rue avec un défi gênant mais drôle (karaoké public, danse TikTok, etc.).',20000,false),
+		('Le streamer laisse le chat contrôler son setup RGB, sons et alertes pendant 1 heure.',35000,false),
+		('Épreuve “roulette infernale” : une contrainte aléatoire toutes les 10 minutes pendant 3 heures.',50000,false),
+		('Duo ou squad improbable avec un autre créateur, avec handicaps imposés par les viewers.',75000,false),
+		('Grand défi final : 24h de stream à thème intégral (médiéval, horreur, rétro 2000, survival, etc.) avec décor, costumes et objectifs communautaires.',100000,false);
+
+--4) insertion de la participation
+INSERT INTO participation_defi( id_streamer, id_defi) 
+	Values 
+		('1','1'),
+		('6','2'),
+		('6','3'),
+		('3','3'),
+		('3','4'),
+		('4','4'),
+		('5','4'),
+		('1','5'),
+		('8','6'),
+		('9','7'),
+		('1','8'),
+		('10','8'),
+		('11','8'),
+		('8','9'),
+		('7','9');
+--5) insertion des streams
+INSERT INTO stream( titre, heure_debut,heure_fin, id_creneau, id_streamer) 
+	Values 
+		('stream 1','2026-10-19 09:00:00+00','2026-10-19 18:00:00+00',1,4),
+		('stream 2','2026-10-19 13:00:00+00','2026-10-19 22:00:00+00',2,3),
+		('stream 3','2026-10-19 17:00:00+00','2026-10-20 07:00:00+00',3,6),
+		('stream 4','2026-10-19 09:00:00+00','2026-10-19 18:00:00+00',4,4),
+		('stream 5','2026-10-19 13:00:00+00','2026-10-19 22:00:00+00',5,3),
+		('stream 6','2026-10-19 17:00:00+00','2026-10-20 07:00:00+00',6,6),
+		('stream 7','2026-10-19 09:00:00+00','2026-10-19 18:00:00+00',7,1),
+		('stream 8','2026-10-19 13:00:00+00','2026-10-19 22:00:00+00',8,5),
+		('stream 9','2026-10-19 17:00:00+00','2026-10-20 07:00:00+00',9,7),
+		('stream 10','2026-10-19 09:00:00+00','2026-10-19 18:00:00+00',10,1),
+		('stream 11','2026-10-19 13:00:00+00','2026-10-19 22:00:00+00',11,5),
+		('stream 12','2026-10-19 17:00:00+00','2026-10-20 07:00:00+00',12,7),
+		('stream 13','2026-10-19 09:00:00+00','2026-10-19 18:00:00+00',13,8),
+		('stream 14','2026-10-19 13:00:00+00','2026-10-19 22:00:00+00',14,9),
+		('stream 15','2026-10-19 17:00:00+00','2026-10-20 07:00:00+00',15,10);
+		

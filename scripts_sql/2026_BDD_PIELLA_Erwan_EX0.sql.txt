@@ -1,0 +1,56 @@
+-- ============================================
+-- Exercice N : Création Tables
+-- Réalisé par : Piella Erwan
+-- Date : 18/05/2026
+-- ============================================
+
+--La table stocke tout les streamer avec un id qui s'auto-incrémente, le pseudo est unique et l'url twitch doit être entière
+CREATE TABLE Streamer(
+   id_streamer SERIAL,
+   pseudo VARCHAR(50) NOT NULL,
+   url_twitch VARCHAR(255) NOT NULL,
+   PRIMARY KEY(id_streamer),
+   UNIQUE(pseudo)
+);
+
+--La table stocke les créneaux qui doivent avoir une date et heure de début avec l'a time zone et un id_streamer
+CREATE TABLE Creneau(
+   id_creneau SERIAL,
+   date_debut_autorisee TIMESTAMP with time zone NOT NULL,
+   date_fin_autorisee TIMESTAMP with time zone NOT NULL,
+   id_streamer INT NOT NULL,
+   PRIMARY KEY(id_creneau),
+   FOREIGN KEY(id_streamer) REFERENCES Streamer(id_streamer)
+);
+
+--la table renseign tout les streams avec le streamer et le creaneau auquel il doit se tenir, il faut renseigner un titre, une heure de début et de fin puis plus tard donne la date et heur de fin effective
+CREATE TABLE Stream(
+   id_stream SERIAL,
+   titre VARCHAR(50) NOT NULL,
+   heure_debut TIMESTAMP with time zone NOT NULL,
+   heure_fin TIMESTAMP with time zone NOT NULL,
+   date_fin_effective TIMESTAMP with time zone,
+   id_creneau INT NOT NULL,
+   id_streamer INT NOT NULL,
+   PRIMARY KEY(id_stream),
+   FOREIGN KEY(id_creneau) REFERENCES Creneau(id_creneau),
+   FOREIGN KEY(id_streamer) REFERENCES Streamer(id_streamer)
+);
+
+--La table défi contient un intitulé, un état de validation et un montant pour le palier
+CREATE TABLE Defi(
+   id_defi SERIAL,
+   intitule VARCHAR(255) NOT NULL,
+   montant_palier DECIMAL(12,2) NOT NULL,
+   etat_validation LOGICAL NOT NULL,
+   PRIMARY KEY(id_defi)
+);
+
+l'association participation_defi lie streamer et defi.
+CREATE TABLE Participation_Defi(
+   id_streamer INT,
+   id_defi INT,
+   PRIMARY KEY(id_streamer, id_defi),
+   FOREIGN KEY(id_streamer) REFERENCES Streamer(id_streamer),
+   FOREIGN KEY(id_defi) REFERENCES Defi(id_defi)
+);
