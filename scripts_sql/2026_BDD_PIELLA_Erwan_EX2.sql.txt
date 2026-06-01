@@ -1,5 +1,5 @@
 -- ============================================
--- Exercice 2 : Création Tables
+-- Exercice 2 : Requetes select simples
 -- Réalisé par : Piella Erwan
 -- Date : 18/05/2026
 -- ============================================

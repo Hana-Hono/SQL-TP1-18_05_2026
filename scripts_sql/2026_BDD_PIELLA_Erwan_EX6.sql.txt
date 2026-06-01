@@ -1,0 +1,33 @@
+-- ============================================
+-- Exercice 6 : Requetes avancee
+-- Réalisé par : Piella Erwan
+-- Date : 01/06/2026
+-- ============================================
+
+--1)
+SELECT streamer.pseudo, COUNT(id_defi) 
+	from streamer inner join participation_defi on streamer.id_streamer = participation_defi.id_streamer
+		group by pseudo, participation_defi.id_streamer
+			having COUNT(id_defi)>=1
+--2)
+SELECT defi.id_defi, montant_palier
+	from defi inner join participation_defi on defi.id_defi = participation_defi.id_defi
+		group by defi.id_defi, participation_defi.id_streamer
+			having COUNT(id_streamer)=0;
+--3)
+SELECT defi.id_defi, montant_palier, COUNT(id_streamer)
+	from defi inner join participation_defi on defi.id_defi = participation_defi.id_defi
+		group by defi.id_defi, participation_defi.id_streamer
+			having COUNT(id_streamer)>2;
+--4)
+Select pseudo, count(defi.id_defi), max(montant_palier)
+	from streamer right join participation_defi on streamer.id_streamer = participation_defi.id_streamer
+		right join defi on participation_defi.id_defi = defi.id_defi
+			group by pseudo
+				order by max(montant_palier)
+--5)
+Select pseudo, date_debut_autorisee, count(id_stream)
+	from streamer right join creneau on streamer.id_streamer = creneau.id_streamer
+		right join stream on stream.id_creneau = creneau.id_creneau
+			group by creneau.id_creneau, pseudo
+				order by max(id_stream)

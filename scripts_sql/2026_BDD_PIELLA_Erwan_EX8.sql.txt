@@ -1,0 +1,17 @@
+-- ============================================
+-- Exercice 8 : Analyse de performance et creation d'index
+-- Réalisé par : Piella Erwan
+-- Date : 01/06/2026
+-- ============================================
+
+-- Execution en 2s, 3 seq scans (5 total)
+-- operations couteuses :
+--	sort / hash / merge / join / group aggregation
+-- on pert beaucoup de temps a parcourir les lignes, les reordonee et le merges
+
+
+-- apres index temp d'execution 190ms
+-- on a un gain de performance de 90%
+-- l'index de steamers a eu le plus d'impact
+-- les jointures participation_defi sonts les plus lentes sans les indexes car il faut faire une jointure avec streamer puis avec 
+-- defi pour les lie soit double le cout mais avec les index ce processus est direct

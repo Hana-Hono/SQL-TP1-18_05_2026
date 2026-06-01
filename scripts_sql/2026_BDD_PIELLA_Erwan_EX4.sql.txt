@@ -1,0 +1,31 @@
+-- ============================================
+-- Exercice 4 : Aggregations et stats
+-- Réalisé par : Piella Erwan
+-- Date : 01/06/2026
+-- ============================================
+
+--1) pseudo et nombre de streams ordonné en ordre croissant de streams
+SELECT pseudo,COALESCE(COUNT(id_stream), 0) 
+	from streamer join stream on streamer.id_streamer = stream.id_streamer
+		group by streamer.id_streamer order by COUNT(id_stream) DESC
+
+--2) affichage des paliers, de leur etat de validation et du montant du palier le plus haut atteind
+SELECT id_defi, etat_validation from defi order by montant_palier DESC;
+SELECT etat_validation, MAX(montant_palier) from defi group by etat_validation
+
+--3) les streamers avec au moins 2 defis et leur nombre de defis
+SELECT streamer.pseudo, COUNT(id_defi) 
+	from streamer inner join participation_defi on streamer.id_streamer = participation_defi.id_streamer
+		group by pseudo, participation_defi.id_streamer
+			having COUNT(id_defi)>=2
+
+--4) duree des stream et duree moyenne des streams
+SELECT titre,
+	EXTRACT(EPOCH FROM (heure_fin - heure_debut)) / 3600 AS duree,
+	AVG(EXTRACT(EPOCH FROM (heure_fin - heure_debut)) / 3600) OVER() AS duree_moyenne 
+		from stream
+	
+--5) affichage des streamers qui on déja lancer un stream et le titre + date du stream
+SELECT pseudo,titre,heure_debut
+	from streamer inner join stream on streamer.id_streamer = stream.id_streamer
+		where heure_debut < CURRENT_DATE

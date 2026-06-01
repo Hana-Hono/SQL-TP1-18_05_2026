@@ -1,0 +1,24 @@
+-- ============================================
+-- Exercice 5 : Mise a jour et suppressions
+-- Réalisé par : Piella Erwan
+-- Date : 01/06/2026
+-- ============================================
+
+--1) augmentation du montant du palier par 10%
+update defi 
+	set montant_palier = montant_palier*1.10
+		where intitule = 'Le streamer joue pendant 1 heure avec les contrôles inversés.'
+--2) validation de tous les defi auquels 3 ou plus streamers participent
+update defi 
+	set etat_validation = TRUE
+		where 
+			(SELECT COUNT(id_streamer) 
+				from participation_defi 
+						where defi.id_defi = participation_defi.id_defi
+							group by participation_defi.id_defi ) > 2
+--3)suppression de certain streams
+DELETE FROM stream 
+	where date_fin_effective = NULL;
+
+DELETE FROM creneau
+	where date_fin_autorisee < CURRENT_DATE;

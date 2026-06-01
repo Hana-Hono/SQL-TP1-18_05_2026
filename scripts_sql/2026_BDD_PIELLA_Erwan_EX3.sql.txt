@@ -1,5 +1,5 @@
 -- ============================================
--- Exercice 3 : Création Tables
+-- Exercice 3 : Requetes jointures simples
 -- Réalisé par : Piella Erwan
 -- Date : 18/05/2026
 -- ============================================
